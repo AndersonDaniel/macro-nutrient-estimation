@@ -1,21 +1,15 @@
-#with open('temp2.txt', 'r') as f:
-#	pdf_text = f.read()
-
 import locale
 locale.setlocale(locale.LC_ALL, 'C')
 from tesserocr import PyTessBaseAPI, RIL
 from PIL import ImageDraw
 import numpy as np
 from itertools import combinations, product
-import pickle
 import re
 
 ingredient_id = re.compile(r'\d+\s*[^\.]')
 instruction_id = re.compile(r'\d+\s*\.')
 
 api = PyTessBaseAPI()
-
-from pdf2image import convert_from_path
 
 fractions = {
 	'½': '1/2',
@@ -31,19 +25,6 @@ fractions = {
 	'⅚': '5/6'
 }
 
-#image = convert_from_path('temp2.pdf')[0]
-
-#w, h = image.size
-#test = image.crop([0, 0, w / 2, h]).convert('LA').convert('RGB')
-#test = image.crop([w / 2, 0, w, h]).convert('LA').convert('RGB')
-#test = image.copy().convert('LA').convert('RGB')
-
-#api.SetImage(test)
-
-#draw = ImageDraw.Draw(test)
-
-#with open('blocks.pkl', 'rb') as f:
-#	blocks = pickle.load(f)
 
 def get_recipe_data(image, pdf_text, blocks):
 	api.SetImage(image)
@@ -73,7 +54,6 @@ def get_recipe_data(image, pdf_text, blocks):
 		'macros': get_macros(texts, servings)
 	}
 
-#test.show()
 
 def get_block_x(block):
 	return min([box[0] for box in block])
@@ -233,12 +213,3 @@ def get_servings(texts):
 
 	return 1
 
-#servings = get_servings()
-
-#print('TITLE: ' + get_title())
-#print('DESCRIPTION: ' + get_description())
-#print('INGREDIENTS: %s' % get_ingredients())
-#print('INSTRUCTIONS: ' + get_instructions())
-#print('MACROS: %s' % get_macros(servings))
-
-#print(texts)
