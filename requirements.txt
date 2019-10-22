@@ -59,7 +59,7 @@ pdf2image==1.5.1
 pdfminer.six==20170720
 pexpect==4.6.0
 pickleshare==0.7.5
-Pillow==5.4.1
+Pillow==6.2.0
 prometheus-client==0.6.0
 prompt-toolkit==2.0.9
 protobuf==3.6.1
